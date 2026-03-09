@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import AdminDashboard from './pages/AdminDashboard';
 import HomePageManager from './pages/HomePageManager';
 import ServicesManager from './pages/ServicesManager';
+import FranchiseManager from './pages/FranchiseManager';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/dashboard" element={<AdminDashboard />} />
         <Route path="/home-management" element={<HomePageManager />} />
         <Route path="/services-management" element={<ServicesManager />} />
+        <Route path="/franchise-management" element={<FranchiseManager />} />
       </Routes>
     </Router>
   );

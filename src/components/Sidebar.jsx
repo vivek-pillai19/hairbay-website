@@ -15,7 +15,7 @@ const navItems = [
   { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard' },
   { icon: Home, label: 'Homepage', path: '/home-management' },
   { icon: Scissors, label: 'Services', path: '/services-management' },
-  { icon: Store, label: 'Franchises', path: '#' },
+  { icon: Store, label: 'Franchises', path: '/franchise-management' },
   { icon: Images, label: 'Banners', path: '#' },
 ];
 
