@@ -4,6 +4,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import HomePageManager from './pages/HomePageManager';
 import ServicesManager from './pages/ServicesManager';
 import FranchiseManager from './pages/FranchiseManager';
+import BannerManager from './pages/BannerManager';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/home-management" element={<HomePageManager />} />
         <Route path="/services-management" element={<ServicesManager />} />
         <Route path="/franchise-management" element={<FranchiseManager />} />
+        <Route path="/banner-management" element={<BannerManager />} />
       </Routes>
     </Router>
   );
