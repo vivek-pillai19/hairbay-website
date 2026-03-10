@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Search, Plus, Images, X, RefreshCw } from 'lucide-react';
-import BannerCard from './BannerCard';
+import BannerCard from '../../../../shared/components/BannerCard';
 
 const BannerList = ({ banners, selectedId, onSelect, onAddNew }) => {
   const [searchTerm, setSearchTerm] = useState('');

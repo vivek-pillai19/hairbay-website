@@ -1,24 +1,38 @@
 import React, { useState } from 'react';
 import { User, AlignLeft, Image as ImageIcon, Save, CheckCircle2 } from 'lucide-react';
 
+import usePublishLifecycle from '../../../../features/homepage-cms/hooks/usePublishLifecycle';
+import useCmsData from '../../../../features/homepage-cms/hooks/useCmsData';
+
 const AboutEditor = () => {
-  const [formData, setFormData] = useState({
-    title: 'Our Heritage & Vision',
-    desc: 'HairBay is a sanctuary of refined masculinity where tradition meets the contemporary. Founded in 1995, our master artisans bring decades of experience to every cut, ensuring a personalized grooming experience that defines distinction.',
-    image: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&q=80'
-  });
-  const [isSaving, setIsSaving] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
+  const { cmsData, setCmsData, isLoading } = useCmsData();
+
+  const formData = cmsData?.about || {
+    title: '',
+    desc: '',
+    image: ''
+  };
+
+  const setFormData = (updater) => {
+    if (!cmsData) return;
+    const nextAboutData = typeof updater === 'function' ? updater(cmsData.about) : updater;
+    setCmsData(prev => ({ ...prev, about: nextAboutData }));
+  };
+
+  const { isProcessing: isSaving, isSuccess: showSuccess, execute } = usePublishLifecycle();
+
+  if (isLoading) {
+    return <div className="p-12 text-center text-slate-500 animate-pulse">Loading about content...</div>;
+  }
 
   const handleUpdate = () => {
-    setIsSaving(true);
-    setTimeout(() => {
-      setIsSaving(false);
-      setShowSuccess(true);
-      setTimeout(() => setShowSuccess(false), 2000);
-      console.log('About Updated:', formData);
-    }, 800);
+    execute({
+      delay: 800,
+      successDuration: 2000,
+      onComplete: () => console.log('About Updated:', formData)
+    });
   };
+
 
   const handleImageUpload = () => {
     const mockImages = [

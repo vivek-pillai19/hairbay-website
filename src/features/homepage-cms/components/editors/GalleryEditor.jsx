@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { LayoutGrid, Image as ImageIcon, Trash2, Plus, Save, Move, CheckCircle2 } from 'lucide-react';
+import OptimizedImage from '../../../../shared/components/OptimizedImage';
 
 const GalleryItem = ({ img, onDelete }) => (
-  <div className="relative aspect-square rounded-xl overflow-hidden group border border-slate-100 dark:border-slate-800 shadow-sm transition-all hover:shadow-lg animate-in fade-in zoom-in duration-300">
-    <img src={img} alt="Gallery" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+  <div className="relative aspect-square rounded-xl overflow-hidden group border border-slate-100 dark:border-slate-800 shadow-sm transition-all hover:shadow-lg animate-in fade-in zoom-in duration-300 bg-slate-100 dark:bg-slate-800">
+    <OptimizedImage src={img} alt="Gallery" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
     <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 backdrop-blur-[2px]">
       <button className="p-2.5 bg-white text-slate-900 rounded-xl shadow-2xl hover:scale-110 active:scale-95 transition-transform" title="Drag to reorder">
         <Move className="w-3.5 h-3.5" />

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Layout, Phone, Mail, MapPin, Share2, Save, Send, CheckCircle2 } from 'lucide-react';
 
+import usePublishLifecycle from '../../../../features/homepage-cms/hooks/usePublishLifecycle';
+
 const FooterEditor = () => {
   const [formData, setFormData] = useState({
     phone: '+91 98765 43210',
@@ -13,27 +15,27 @@ const FooterEditor = () => {
       whatsapp: '+91 98765 43210'
     }
   });
-  const [isSaving, setIsSaving] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [isPublishing, setIsPublishing] = useState(false);
+
+  // Use separate instances of usePublishLifecycle for update and publish actions
+  const { isProcessing: isSaving, isSuccess: showSuccess, execute: executeUpdate } = usePublishLifecycle();
+  const { isProcessing: isPublishing, execute: executePublish } = usePublishLifecycle();
 
   const handleUpdate = () => {
-    setIsSaving(true);
-    setTimeout(() => {
-      setIsSaving(false);
-      setShowSuccess(true);
-      setTimeout(() => setShowSuccess(false), 2000);
-      console.log('Footer Updated:', formData);
-    }, 800);
+    executeUpdate({
+      delay: 800,
+      successDuration: 2000,
+      onComplete: () => console.log('Footer Updated:', formData)
+    });
   };
 
   const handlePublishAll = () => {
-    setIsPublishing(true);
-    setTimeout(() => {
-      setIsPublishing(false);
-      alert('All site content has been published successfully!');
-    }, 1500);
+    executePublish({
+      delay: 1500,
+      successDuration: 0,
+      onComplete: () => alert('All site content has been published successfully!')
+    });
   };
+
 
   return (
     <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 animate-in fade-in slide-in-from-bottom duration-700">
