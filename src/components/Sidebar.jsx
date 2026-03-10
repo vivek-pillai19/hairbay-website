@@ -14,7 +14,7 @@ import {
 const navItems = [
   { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard' },
   { icon: Home, label: 'Homepage', path: '/home-management' },
-  { icon: Scissors, label: 'Services', path: '#' },
+  { icon: Scissors, label: 'Services', path: '/services-management' },
   { icon: Store, label: 'Franchises', path: '#' },
   { icon: Images, label: 'Banners', path: '#' },
 ];
