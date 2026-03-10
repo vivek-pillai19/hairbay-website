@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Save, Trash2, X, RefreshCcw, CheckCircle2 } from 'lucide-react';
 import BannerForm from './BannerForm';
 
+import usePublishLifecycle from '../../../../features/homepage-cms/hooks/usePublishLifecycle';
+
 const BannerEditor = ({ banner, onUpdate, onDelete, onCancel }) => {
   const [formData, setFormData] = useState({
     id: '',
@@ -13,9 +15,9 @@ const BannerEditor = ({ banner, onUpdate, onDelete, onCancel }) => {
     order: 1,
     status: 'Active'
   });
-  const [isSaving, setIsSaving] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
+
+  const { isProcessing: isSaving, isSuccess: showSuccess, execute: executeSave } = usePublishLifecycle();
+  const { isProcessing: isDeleting, execute: executeDelete } = usePublishLifecycle();
 
   useEffect(() => {
     if (banner) {
@@ -24,24 +26,23 @@ const BannerEditor = ({ banner, onUpdate, onDelete, onCancel }) => {
   }, [banner]);
 
   const handleUpdate = () => {
-    setIsSaving(true);
-    setTimeout(() => {
-      onUpdate(formData);
-      setIsSaving(false);
-      setShowSuccess(true);
-      setTimeout(() => setShowSuccess(false), 2000);
-    }, 800);
+    executeSave({
+      delay: 800,
+      successDuration: 2000,
+      onComplete: () => onUpdate(formData)
+    });
   };
 
   const handleDelete = () => {
     if (window.confirm('Are you sure you want to remove this banner?')) {
-      setIsDeleting(true);
-      setTimeout(() => {
-        onDelete(formData.id);
-        setIsDeleting(false);
-      }, 800);
+      executeDelete({
+        delay: 800,
+        successDuration: 0,
+        onComplete: () => onDelete(formData.id)
+      });
     }
   };
+
 
   const handleImageUpload = () => {
     const mockImages = [

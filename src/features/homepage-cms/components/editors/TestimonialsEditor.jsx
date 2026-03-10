@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Quote, User, Star, Plus, Trash2, Edit3, Image as ImageIcon, Save, CheckCircle2 } from 'lucide-react';
+import OptimizedImage from '../../../../shared/components/OptimizedImage';
 
 const TestimonialItem = ({ name, review, rating, img, onDelete, onEdit }) => (
   <div className="p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl flex flex-col gap-4 group hover:border-primary/40 transition-all shadow-sm relative animate-in fade-in zoom-in duration-300">
     <div className="flex items-center gap-4">
-      <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-slate-100 dark:border-slate-800 shadow-sm flex-shrink-0">
-        <img src={img} alt={name} className="w-full h-full object-cover" />
+      <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-slate-100 dark:border-slate-800 shadow-sm flex-shrink-0 bg-slate-100 dark:bg-slate-800">
+        <OptimizedImage src={img} alt={name} className="w-full h-full object-cover transition-opacity duration-300" />
       </div>
       <div className="flex-1 min-w-0">
         <h4 className="text-xs font-bold text-slate-900 dark:text-white truncate">{name}</h4>

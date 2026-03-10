@@ -1,27 +1,40 @@
 import React, { useState } from 'react';
 import { Image as ImageIcon, Type, Link, Edit3, Save, CheckCircle2 } from 'lucide-react';
 
+import usePublishLifecycle from '../../../../features/homepage-cms/hooks/usePublishLifecycle';
+import useCmsData from '../../../../features/homepage-cms/hooks/useCmsData';
+
 const HeroEditor = () => {
-  const [formData, setFormData] = useState({
-    heading: 'Elegance in Every Cut',
-    subheading: 'Experience the art of grooming at HairBay.',
-    btnText: 'Book Appointment',
-    btnLink: '/booking',
-    banner: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80'
-  });
-  const [isSaving, setIsSaving] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
+  const { cmsData, setCmsData, isLoading } = useCmsData();
+
+  const formData = cmsData?.hero || {
+    heading: '',
+    subheading: '',
+    btnText: '',
+    btnLink: '',
+    banner: ''
+  };
+
+  const setFormData = (updater) => {
+    if (!cmsData) return;
+    const nextHeroData = typeof updater === 'function' ? updater(cmsData.hero) : updater;
+    setCmsData(prev => ({ ...prev, hero: nextHeroData }));
+  };
+
+  const { isProcessing: isSaving, isSuccess: showSuccess, execute } = usePublishLifecycle();
+
+  if (isLoading) {
+    return <div className="p-12 text-center text-slate-500 animate-pulse">Loading hero content...</div>;
+  }
 
   const handleUpdate = () => {
-    setIsSaving(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsSaving(false);
-      setShowSuccess(true);
-      setTimeout(() => setShowSuccess(false), 2000);
-      console.log('Hero Updated:', formData);
-    }, 800);
+    execute({
+      delay: 800,
+      successDuration: 2000,
+      onComplete: () => console.log('Hero Updated:', formData)
+    });
   };
+
 
   const handleImageUpload = () => {
     // Mock image upload

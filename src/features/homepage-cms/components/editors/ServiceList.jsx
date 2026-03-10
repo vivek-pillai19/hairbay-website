@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Search, Filter, Plus, ChevronDown, Scissors, ArrowUpDown } from 'lucide-react';
-import ServiceCard from './ServiceCard';
+import ServiceCard from '../../../../shared/components/ServiceCard';
 
 const ServiceList = ({ services, selectedId, onSelect, onAddNew }) => {
   const [searchTerm, setSearchTerm] = useState('');

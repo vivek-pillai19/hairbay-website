@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Scissors, Plus, Trash2, Edit3, Image as ImageIcon, Link, Save, CheckCircle2 } from 'lucide-react';
+import OptimizedImage from '../../../../shared/components/OptimizedImage';
 
 const ServicePreviewItem = ({ title, desc, img, onDelete, onEdit }) => (
   <div className="p-4 bg-slate-50/50 dark:bg-slate-800/30 border border-slate-100 dark:border-slate-800 rounded-xl flex items-center gap-4 group hover:border-primary/30 transition-all shadow-sm">
-    <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-slate-200 shadow-inner">
-      <img src={img} alt={title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+    <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-slate-200 dark:bg-slate-700 shadow-inner">
+      <OptimizedImage src={img} alt={title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
     </div>
     <div className="flex-1 min-w-0">
       <h4 className="text-xs font-bold text-slate-900 dark:text-white truncate">{title}</h4>

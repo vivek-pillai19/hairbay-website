@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Search, Filter, Plus, ChevronDown, Store, ArrowUpDown, X, RefreshCw } from 'lucide-react';
-import FranchiseCard from './FranchiseCard';
+import FranchiseCard from '../../../../shared/components/FranchiseCard';
 
 const FranchiseList = ({ franchises, selectedId, onSelect, onAddNew }) => {
   const [searchTerm, setSearchTerm] = useState('');
